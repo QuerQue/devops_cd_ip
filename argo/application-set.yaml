@@ -7,7 +7,7 @@ spec:
   generators:
     - list:
         elements:
-          - cluster: dev-global-cluster-0
+          - cluster: dev-cluster-0
             valuesFile: dev-global-cluster-0-values.yaml
             env: dev
           # - cluster: prd-global-cluster-5
@@ -17,7 +17,7 @@ spec:
     metadata:
       name: '{{cluster}}-spring-boot-api'
     spec:
-      project: spring-boot-api-project
+      project: default
       source:
         repoURL: https://github.com/QuerQue/devops_cd_ip.git
         targetRevision: HEAD
