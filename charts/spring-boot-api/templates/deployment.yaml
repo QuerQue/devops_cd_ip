@@ -25,20 +25,18 @@ spec:
           command: ["sh", "-c"]
           args:
             - |
-              echo -e "HTTP/1.1 200 OK\n\nHello from API endpoint" | nc -l -p 8081 &
-              echo -e "HTTP/1.1 200 OK\n\nHello from Logs endpoint" | nc -l -p 8082 &
-              echo -e "HTTP/1.1 200 OK\n\nHello from SOAP endpoint" | nc -l -p 8083 &
+            while true; do echo -e "HTTP/1.1 200 OK\n\nHello from API endpoint" | nc -l -p 8081 & echo -e "HTTP/1.1 200 OK\n\nHello from Logs endpoint" | nc -l -p 8082 & echo -e "HTTP/1.1 200 OK\n\nHello from SOAP endpoint" | nc -l -p 8083 & wait; done
           #   - "--spring.profiles.active=dev"
-          lifecycle:
-            preStop:
-              exec:
-                command: ["wget", "http://localhost:8081/service/shutdown"]
-          readinessProbe:
-            tcpSocket:
-              port: 8081
-          livenessProbe:
-            tcpSocket:
-              port: 8081
+          # lifecycle:
+          #   preStop:
+          #     exec:
+          #       command: ["wget", "http://localhost:8081/service/shutdown"]
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 8081
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 8081
           resources:
             requests:
               memory: "256Mi"
