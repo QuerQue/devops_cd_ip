@@ -16,27 +16,32 @@ spec:
         - name: spring-boot-api
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           ports:
+            - containerPort: 8080
             - containerPort: 8081
             - containerPort: 8082
-            - containerPort: 8083
           envFrom:
             - secretRef:
                 name: spring-boot-secrets
           command: ["sh", "-c"]
           args:
             - |
-              while true; do echo -e "HTTP/1.1 200 OK\n\nHello from API endpoint" | nc -l -p 8081 & echo -e "HTTP/1.1 200 OK\n\nHello from Logs endpoint" | nc -l -p 8082 & echo -e "HTTP/1.1 200 OK\n\nHello from SOAP endpoint" | nc -l -p 8083 & wait; done
+              while true; do 
+              echo -e "HTTP/1.1 200 OK\n\nHello from API endpoint" | nc -l -p 8080 & 
+              echo -e "HTTP/1.1 200 OK\n\nHello from Logs endpoint" | nc -l -p 8081 & 
+              echo -e "HTTP/1.1 200 OK\n\nHello from SOAP endpoint" | nc -l -p 8082 & wait; done
           #   - "--spring.profiles.active=dev"
-          # lifecycle:
-          #   preStop:
-          #     exec:
-          #       command: ["wget", "http://localhost:8081/service/shutdown"]
+          lifecycle:
+            preStop:
+              exec:
+                command: ["wget", "http://localhost:8080/service/shutdown"]
           readinessProbe:
             tcpSocket:
-              port: 8081
+              port: 8080
+            initialDelaySeconds: 5
           livenessProbe:
             tcpSocket:
-              port: 8081
+              port: 8080
+            initialDelaySeconds: 5
           resources:
             requests:
               memory: "256Mi"
