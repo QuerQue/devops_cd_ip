@@ -9,7 +9,7 @@ spec:
       app: spring-boot-api
   template:
     annotations:
-      checksum/config-map: {{ include (print $.Template.BasePath "configmap.yaml") . | sha256sum }}
+      checksum/config-map: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     metadata:
       labels:
         app: spring-boot-api
