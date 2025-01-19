@@ -24,8 +24,6 @@ spec:
                 name: spring-boot-secrets
           command: ["sh", "-c"]
           args:
-            - sh
-            - -c
             - |
               while true; do
                 echo -e "HTTP/1.1 200 OK\n\nHello from API endpoint" | nc -l -p 8080;
