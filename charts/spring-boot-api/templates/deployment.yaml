@@ -26,6 +26,7 @@ spec:
           args:
             - |
               while true; do
+                sleep 5
                 echo -e "HTTP/1.1 200 OK\n\nHello from API endpoint" | nc -l -p 8081 &
                 echo -e "HTTP/1.1 200 OK\n\nHello from Logs endpoint" | nc -l -p 8082 &
                 echo -e "HTTP/1.1 200 OK\n\nHello from SOAP endpoint" | nc -l -p 8083 &
