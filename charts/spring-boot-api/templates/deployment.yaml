@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-boot-api
-  annotations:
-    checksum/config: "{{ .Files.Get .Values.configFile | sha256sum }}"
+  # annotations:
+  #   checksum/config: "{{ .Files.Get .Values.configFile | sha256sum }}"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
