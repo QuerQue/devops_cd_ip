@@ -23,7 +23,7 @@ spec:
             - secretRef:
                 name: spring-boot-secrets
           args:
-            - "--spring.profiles.active={{ .Values.springProfile }}"
+            - "--spring.profiles.active=dev"
           lifecycle:
             preStop:
               exec:
