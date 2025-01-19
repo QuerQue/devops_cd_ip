@@ -1,1 +1,9 @@
 replicaCount: 3
+springProfile: dev
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "200m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"

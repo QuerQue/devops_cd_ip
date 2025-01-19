@@ -1,11 +1,4 @@
-replicaCount: 3
+replicaCount: 1
 image:
   repository: busybox
   tag: stable
-resources:
-  requests:
-    memory: "256Mi"
-    cpu: "500m"
-  limits:
-    memory: "512Mi"
-    cpu: "1000m"

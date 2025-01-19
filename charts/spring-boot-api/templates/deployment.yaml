@@ -25,7 +25,7 @@ spec:
           command: ["sh", "-c"]
           args:
             - sleep 7200
-#           - "--spring.profiles.active=dev"
+#           - "--spring.profiles.active={{.Values.springProfile}}"
           lifecycle:
             preStop:
               exec:
@@ -38,11 +38,11 @@ spec:
               port: 8080
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "500m"
+              memory: {{ .Values.resources.requests.memory }}
+              cpu: {{ .Values.resources.requests.cpu }}
             limits:
-              memory: "512Mi"
-              cpu: "1000m"
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
           volumeMounts:
             - name: config-volume
               mountPath: /app/config.json
