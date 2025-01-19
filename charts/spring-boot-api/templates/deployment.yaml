@@ -31,12 +31,12 @@ spec:
           #   preStop:
           #     exec:
           #       command: ["wget", "http://localhost:8081/service/shutdown"]
-          # readinessProbe:
-          #   tcpSocket:
-          #     port: 8081
-          # livenessProbe:
-          #   tcpSocket:
-          #     port: 8081
+          readinessProbe:
+            tcpSocket:
+              port: 8081
+          livenessProbe:
+            tcpSocket:
+              port: 8081
           resources:
             requests:
               memory: "256Mi"
