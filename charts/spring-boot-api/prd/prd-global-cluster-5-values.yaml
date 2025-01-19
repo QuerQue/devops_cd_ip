@@ -7,3 +7,4 @@ resources:
   limits:
     memory: "1024Mi"
     cpu: "1000m"
+host: prd.example.com

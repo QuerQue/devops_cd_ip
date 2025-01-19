@@ -8,6 +8,8 @@ spec:
     matchLabels:
       app: spring-boot-api
   template:
+    annotations:
+      configmap-checksum: {{ include (print $.Template.BasePath "configmap.yaml") . | sha256sum }}
     metadata:
       labels:
         app: spring-boot-api
@@ -15,6 +17,11 @@ spec:
       containers:
         - name: spring-boot-api
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
           ports:
             - containerPort: 8080
             - containerPort: 8081
@@ -30,12 +37,12 @@ spec:
             preStop:
               exec:
                 command: ["wget", "http://localhost:8080/service/shutdown"]
-          readinessProbe:
-            tcpSocket:
-              port: 8080
-          livenessProbe:
-            tcpSocket:
-              port: 8080
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 8080
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 8080
           resources:
             requests:
               memory: {{ .Values.resources.requests.memory }}

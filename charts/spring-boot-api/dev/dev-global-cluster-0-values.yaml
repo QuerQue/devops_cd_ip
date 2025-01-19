@@ -7,3 +7,4 @@ resources:
   limits:
     memory: "512Mi"
     cpu: "500m"
+host: dev.example.com
