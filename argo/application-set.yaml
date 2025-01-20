@@ -8,11 +8,11 @@ spec:
     - list:
         elements:
           - cluster: dev-cluster-0
-            url: https://09A8DECE0750EEC3F791FDF83AAAED93.gr7.eu-central-1.eks.amazonaws.com
+            url: <url-eks-cluster-here>
             valuesFile: dev-global-cluster-0-values.yaml
             env: dev
           - cluster: prd-cluster-0
-            url: https://09A8DECE0750EEC3F791FDF83AAAED93.gr7.eu-central-1.eks.amazonaws.com
+            url: <url-eks-cluster-here>
             valuesFile: prd-global-cluster-5-values.yaml
             env: prd
   template:
